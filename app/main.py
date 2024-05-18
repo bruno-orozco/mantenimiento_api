@@ -1,5 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from sqlalchemy.orm import Session
+from starlette.responses import JSONResponse
+
 from app.database import engine, SessionLocal, Base
 from app.models.maintenance import MaintenanceOrder, MaintenanceOrderStatus
 from app.models.vehicle import Vehicle
@@ -140,6 +142,10 @@ def create_initial_data(db: Session):
 
 # Run this function when the application starts
 create_initial_data(SessionLocal())
+
+@app.get("/", response_class=JSONResponse, tags=["Welcome"], summary="Welcome to the Vehicle Maintenance Orders API")
+async def read_root():
+    return {"message": "Welcome to the Vehicle Maintenance Orders API. Please check the documentation at http://127.0.0.1:8000/docs"}
 
 # Include routers
 app.include_router(vehicle.router)
