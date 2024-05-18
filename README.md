@@ -58,7 +58,7 @@ Estas tecnologías fueron seleccionadas para asegurar un desarrollo eficiente y 
 2. **Construye y ejecuta los contenedores de Docker:**
 
 ```bash
-docker-compose up -d --build
+docker-compose up --build
 ```
 
 3. **Accede a la documentación de la API:**
