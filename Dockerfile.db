@@ -1,0 +1,17 @@
+# Dockerfile.db
+FROM postgres:14
+
+# Define variables de entorno para PostgreSQL
+ENV POSTGRES_USER=postgres
+ENV POSTGRES_PASSWORD=password
+ENV POSTGRES_DB=mantenimiento_db
+
+# Copia el archivo de inicialización
+COPY ./init.sql /docker-entrypoint-initdb.d/
+
+# Configura PostgreSQL para escuchar en todas las interfaces
+RUN echo "host    all             all             0.0.0.0/0               md5" >> /etc/postgresql/postgresql.conf
+RUN echo "listen_addresses = '*'" >> /etc/postgresql/postgresql.conf
+
+# Puerto que expone PostgreSQL
+EXPOSE 5432
